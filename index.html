@@ -1,10 +1,270 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My Research Website</title>
-  </head>
-  <body>
-    <h1>Welcome to My Research Page</h1>
-    <p>This is where I will share my work.</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pankaj Lahon — Portfolio</title>
+  <meta name="description" content="Portfolio website for research, projects, and contact." />
+  <meta property="og:title" content="Pankaj Lahon — Portfolio" />
+  <meta property="og:description" content="Portfolio website for research, projects, and contact." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg: #0b1220;        /* deep blue */
+      --card: #111827;      /* slate-900 */
+      --muted: #94a3b8;     /* slate-400 */
+      --text: #e5e7eb;      /* gray-200 */
+      --brand: #60a5fa;     /* blue-400 */
+      --brand-2:#22d3ee;    /* cyan-400 */
+      --ring: rgba(96,165,250,.4);
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --maxw: 1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg),#0f172a);color:var(--text);font:16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:var(--maxw);margin-inline:auto;padding:24px}
+    header{position:sticky;top:0;backdrop-filter:saturate(140%) blur(10px);background:rgba(11,18,32,.6);border-bottom:1px solid rgba(148,163,184,.15);z-index:10}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
+    .logo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 6px 18px rgba(34,211,238,.35)}
+    .menu{display:flex;gap:18px;align-items:center}
+    .menu a{padding:8px 12px;border-radius:999px}
+    .menu a:hover{background:rgba(148,163,184,.12)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid rgba(148,163,184,.25);background:#0b1220;color:var(--text);box-shadow:var(--shadow)}
+    .btn:hover{border-color:rgba(148,163,184,.45)}
+
+    /* mobile menu */
+    #nav-toggle{display:none}
+    .hamburger{display:none;cursor:pointer;padding:10px;border-radius:10px;border:1px solid rgba(148,163,184,.2)}
+    @media (max-width: 820px){
+      .menu{display:none}
+      .hamburger{display:block}
+      #nav-toggle:checked ~ .menu{display:flex;position:absolute;left:24px;right:24px;top:64px;flex-direction:column;background:rgba(2,6,23,.95);border:1px solid rgba(148,163,184,.2);border-radius:16px;padding:14px}
+      .menu a{padding:12px}
+    }
+
+    /* hero */
+    .hero{padding:64px 24px 24px}
+    .hero-inner{display:grid;grid-template-columns: 1.1fr .9fr;gap:28px;align-items:center}
+    .tag{display:inline-flex;gap:8px;align-items:center;font-size:14px;padding:6px 10px;border-radius:999px;border:1px solid rgba(148,163,184,.25);color:var(--muted)}
+    h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:14px 0}
+    .lead{color:#cbd5e1;font-size:clamp(15px,2.2vw,18px)}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .hero-card{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(34,211,238,.10));border:1px solid rgba(96,165,250,.25);border-radius:var(--radius);padding:22px}
+    .hero-img{aspect-ratio:4/3;border-radius:var(--radius);background:radial-gradient(1200px 400px at 10% 10%,rgba(96,165,250,.22),transparent 60%),radial-gradient(800px 300px at 80% 20%,rgba(34,211,238,.18),transparent 50%),#0b1220;border:1px solid rgba(148,163,184,.18);box-shadow:var(--shadow)}
+    @media (max-width: 900px){.hero-inner{grid-template-columns:1fr}}
+
+    /* sections */
+    section{padding:24px 0}
+    .section-title{font-size:22px;margin:0 0 10px}
+    .section-sub{color:var(--muted);margin:0 0 18px}
+    .card{background:var(--card);border:1px solid rgba(148,163,184,.16);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+
+    /* grid */
+    .grid{display:grid;gap:16px}
+    .grid-3{grid-template-columns: repeat(3, 1fr)}
+    .grid-2{grid-template-columns: repeat(2, 1fr)}
+    @media (max-width: 900px){.grid-3{grid-template-columns:1fr 1fr}}
+    @media (max-width: 640px){.grid-3,.grid-2{grid-template-columns:1fr}}
+
+    /* timeline list */
+    .list{display:grid;gap:10px}
+    .list-item{display:flex;align-items:flex-start;gap:12px}
+    .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand-2));margin-top:9px}
+
+    /* table */
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid rgba(148,163,184,.18);text-align:left}
+    th{color:#cbd5e1;font-weight:600}
+
+    /* contact */
+    form{display:grid;gap:12px}
+    input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(148,163,184,.25);background:#0b1220;color:var(--text);outline:none}
+    input:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0 0 6px var(--ring)}
+    textarea{min-height:120px}
+
+    footer{padding:40px 24px;color:var(--muted);text-align:center}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><div class="logo" aria-hidden></div> <span>Pankaj Lahon</span></div>
+      <label class="hamburger" for="nav-toggle" aria-label="Toggle menu">☰</label>
+      <input type="checkbox" id="nav-toggle" hidden>
+      <nav class="menu" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="#cv">Download CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <span class="tag">Computational Seismology • Geophysics • Python</span>
+          <h1>Hi, I’m <span style="background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent">Pankaj</span> — I build models, pipelines, and insights from seismic noise.</h1>
+          <p class="lead">MSc.Tech in Applied Geophysics. Interested in ambient noise tomography, FWI, and scientific Python. Seeking PhD opportunities and collaborations.</p>
+          <div class="cta">
+            <a class="btn" href="#projects" aria-label="View projects">View Projects →</a>
+            <a class="btn" href="#contact" aria-label="Contact me">Contact Me</a>
+          </div>
+          <div class="hero-card" style="margin-top:18px">
+            <strong>Currently:</strong> Preparing interview materials for computational seismology; building tools for SEG-Y ↔ SAC workflows.
+          </div>
+        </div>
+        <div class="hero-img card"></div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="container grid grid-2">
+        <div class="card">
+          <h2 class="section-title">About</h2>
+          <p>I’m a geophysics grad with hands-on experience in cross-correlation of ambient seismic noise, preprocessing pipelines (ObsPy), and straight-ray tomography. I enjoy turning raw field data into clean, interpretable results and visualizations.</p>
+          <p>Long-term, I’m aiming for a research career near Assam, contributing to academia or national labs.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Highlights</h3>
+          <ul>
+            <li>Cross-correlated 14-station array (91 pairs) with automated QC.</li>
+            <li>Implemented temporal normalization & spectral whitening.</li>
+            <li>Experience with CPS-based dispersion modeling.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-sub">A few things I’ve built or worked on recently.</p>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Ambient Noise CC Automation</h3>
+            <p>Fully automated cross-correlation for 14 SEG-Y inputs → 91 SAC outputs, with preprocessing, whitening, and stacking.</p>
+            <p><a href="#" aria-label="Project link 1">View repo →</a></p>
+          </article>
+          <article class="card">
+            <h3>Straight-Ray Tomography (2D)</h3>
+            <p>Grid-based inversion with frequency-dependent GCV. Produces Vs maps with uncertainty estimates.</p>
+            <p><a href="#" aria-label="Project link 2">Read docs →</a></p>
+          </article>
+          <article class="card">
+            <h3>Pseudo‑3D Vs Model (CPS)</h3>
+            <p>Interpolated dispersion between station pairs and layered inversion to derive pseudo‑3D structure.</p>
+            <p><a href="#" aria-label="Project link 3">Method & data →</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <div class="container">
+        <h2 class="section-title">Publications & Preprints</h2>
+        <div class="card">
+          <table aria-label="Publications list">
+            <thead>
+              <tr><th>Year</th><th>Title</th><th>Venue</th><th>Link</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>2025</td><td>Interstation CC for Ambient Noise FWI</td><td>Preprint</td><td><a href="#">PDF</a></td></tr>
+              <tr><td>2024</td><td>Dispersion-Based Pseudo‑3D Modeling</td><td>Workshop</td><td><a href="#">Slides</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Languages</h3>
+            <p>Python (ObsPy, NumPy, SciPy, Matplotlib), Bash</p>
+          </div>
+          <div class="card">
+            <h3>Domains</h3>
+            <p>Ambient Noise, Tomography, FWI, Signal Processing</p>
+          </div>
+          <div class="card">
+            <h3>Tools</h3>
+            <p>ObsPy, SAC, SEG-Y, CPS, Git/GitHub, Linux</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CV & Contact -->
+    <section id="cv">
+      <div class="container grid grid-2">
+        <div class="card">
+          <h2 class="section-title">Curriculum Vitae</h2>
+          <p>Keep a PDF of your CV in the repository and link to it here.</p>
+          <a class="btn" href="./Pankaj_Lahon_CV.pdf" download>Download CV</a>
+        </div>
+        <div id="contact" class="card">
+          <h2 class="section-title">Contact</h2>
+          <form action="mailto:your.email@example.com" method="post" enctype="text/plain">
+            <label>
+              Name
+              <input name="name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" required />
+            </label>
+            <label>
+              Message
+              <textarea name="message" required></textarea>
+            </label>
+            <button class="btn" type="submit">Send</button>
+          </form>
+          <p class="section-sub" style="margin-top:8px">Tip: For a production form, use a service like Formspree or Netlify Forms.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="y"></span> Pankaj Lahon • Built with GitHub Pages
+    </div>
+  </footer>
+
+  <script>
+    // dynamic year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id=a.getAttribute('href');
+        if(id.length>1){
+          e.preventDefault();
+          document.querySelector(id).scrollIntoView({behavior:'smooth'});
+          if(document.getElementById('nav-toggle')){
+            document.getElementById('nav-toggle').checked=false;
+          }
+        }
+      });
+    });
+  </script>
+</body>
 </html>
